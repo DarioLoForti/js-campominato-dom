@@ -1,13 +1,13 @@
 // creo funzione che genera numeri random
 
-function generaterandombomb (bombs){
+function generateRandomBomb (arrayBombs){
     let checkBomb = false;
     let randomBomb ;
 
     while(!checkBomb){
         randomBomb = Math.floor(Math.random() * 100 + 1);
 
-        if(!bombs.includes(randomBomb)){
+        if(!arrayBombs.includes(randomBomb)){
             checkBomb = true
         }
 
@@ -21,6 +21,11 @@ function generaterandombomb (bombs){
 
 function createBombs(bombsNumber){
     let bombs = [];
+
+    for(let i=0; i<bombsNumber; i++){
+        bombs.push(generateRandomBomb(bombs));
+    }
+    return bombs;
 }
 
 
@@ -38,19 +43,28 @@ function createCell(num){
 function createGame(){
 
     let grid = document.getElementById("grid");
-        grid.innerHTML = "";
+    let numberOfBombs = 16;
+    grid.innerHTML = "";
+    let bombs = createBombs(numberOfBombs);
+    console.log(bombs);
+
+        
 
         for( let i=1; i<=100; i++){
             let square = createCell(i);
             
-            grid.appendChild(square);
-            
             square.addEventListener("click", function(){
-                this.classList.toggle("press");
-                console.log(`Cella cliccata: ${i}`);
+
+                if(!bombs.includes(i)){
+                    this.classList.add("press");
+                }
+                else{
+                    this.classList.add("danger");
+                }
             })
-        }
-        
+
+            grid.appendChild(square);
+        }    
 }
 
 // creo funzione per far si che la giglia compaia dopo aver cliccato il bottone
