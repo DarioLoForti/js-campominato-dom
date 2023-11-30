@@ -1,11 +1,11 @@
 // creo funzione che genera numeri random
 
-function generateRandomBomb (arrayBombs){
+function generateRandomBomb (arrayBombs, cellTot){
     let checkBomb = false;
     let randomBomb ;
 
     while(!checkBomb){
-        randomBomb = Math.floor(Math.random() * 100 + 1);
+        randomBomb = Math.floor(Math.random() * cellTot + 1);
 
         if(!arrayBombs.includes(randomBomb)){
             checkBomb = true
@@ -17,11 +17,11 @@ function generateRandomBomb (arrayBombs){
 
 // creo funzione per la generazione delle bombe
 
-function createBombs(bombsNumber){
+function createBombs(bombsNumber, cellTot){
     let bombs = [];
 
     for(let i=0; i<bombsNumber; i++){
-        bombs.push(generateRandomBomb(bombs));
+        bombs.push(generateRandomBomb(bombs, cellTot));
     }
     return bombs;
 }
@@ -51,8 +51,6 @@ function createGame(){
     let livello = parseInt(difficolta.value);
 
     let numberOfBombs = 16;
-    let bombs = createBombs(numberOfBombs);
-    console.log(bombs);
     let punti = 0;
     
     let numberCells;
@@ -74,6 +72,9 @@ function createGame(){
     }
 
     cellsRow = Math.sqrt(numberCells);
+
+    let bombs = createBombs(numberOfBombs, numberCells);
+    console.log(bombs);
         
         for( let i=1; i<=numberCells; i++){
             let square = createCell(i, cellsRow);
