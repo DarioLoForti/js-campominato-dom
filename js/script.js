@@ -1,3 +1,29 @@
+// creo funzione che genera numeri random
+
+function generaterandombomb (bombs){
+    let checkBomb = false;
+    let randomBomb ;
+
+    while(!checkBomb){
+        randomBomb = Math.floor(Math.random() * 100 + 1);
+
+        if(!bombs.includes(randomBomb)){
+            checkBomb = true
+        }
+
+    }
+
+    return randomBomb;
+}
+
+
+// creo funzione per la generazione delle bombe
+
+function createBombs(bombsNumber){
+    let bombs = [];
+}
+
+
 // aggiungo funzione che crea casella della griglia
 
 function createCell(num){
@@ -7,16 +33,13 @@ function createCell(num){
     return element;
 }
 
+// creo funzione per far iniziare la partita
 
-// creo funzione per far si che la giglia compaia dopo aver cliccato il bobttone
-let button = document.getElementById("button");
+function createGame(){
 
+    let grid = document.getElementById("grid");
+        grid.innerHTML = "";
 
-function play(btn){
-    button.addEventListener("click", function(){
-
-        let grid = document.getElementById("grid");
-        grid.innerHTML = ""
         for( let i=1; i<=100; i++){
             let square = createCell(i);
             
@@ -24,15 +47,15 @@ function play(btn){
             
             square.addEventListener("click", function(){
                 this.classList.toggle("press");
-                console.log(`Cella cliccata: ${i}`)
+                console.log(`Cella cliccata: ${i}`);
             })
         }
         
-    })
-
-
 }
 
-play(button);
+// creo funzione per far si che la giglia compaia dopo aver cliccato il bottone
 
- 
+let button = document.getElementById("button");
+button.addEventListener("click", function(){
+        createGame();
+})
