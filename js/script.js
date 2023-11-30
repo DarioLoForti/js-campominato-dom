@@ -47,7 +47,7 @@ function createGame(){
     grid.innerHTML = "";
     let bombs = createBombs(numberOfBombs);
     console.log(bombs);
-
+    let punti = 0;
         
 
         for( let i=1; i<=100; i++){
@@ -57,6 +57,9 @@ function createGame(){
 
                 if(!bombs.includes(i)){
                     this.classList.add("press");
+                    punti++;
+
+                    document.getElementById("punteggio").innerText = `il tuo punteggio è: ${punti} punti`;
                 }
                 else{
                     this.classList.add("danger");
